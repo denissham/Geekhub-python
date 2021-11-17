@@ -3,5 +3,5 @@
 		# Expected output: 1e, 04
 my_decimal = int(input('Please input decimal number: '))
 
-my_hexodecimal = hex(my_decimal)
+my_hexodecimal = hex(my_decimal)[2:]
 print('Hexodecimal =', my_hexodecimal)

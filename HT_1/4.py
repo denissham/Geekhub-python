@@ -1,7 +1,6 @@
 # Write a script to concatenate N strings.
 
-my_strings = input('Please input comma separated strings: ')
-
-my_list = my_strings.split(',')
-summ = "".join(my_list)
+n = int(input('Please input strings quantity: '))
+my_strings = [str(input('Enter a string: ')) for i in range(n)]
+summ = "".join(my_strings)
 print(summ)
