@@ -1,6 +1,6 @@
 # Ну і традиційно -> калькулятор :) повинна бути 1 ф-цiя яка б приймала 3 аргументи - один з яких операцiя, яку зробити!
 
-# def calculator(a,b,operation):
+
 def calculator():
 	while True:
 		try:
@@ -28,11 +28,4 @@ def calculator():
 	else:
 			print("Соррян, я не настільки крутий, щоб порахувати те, що ви ввели!")
 	
-
-
-# a = input("Введіть перше число: ")
-# operation = input("Введіть знак операції: ")
-# b = input("Введіть друге число: ")
-
-# calculator(a,b,operation)
 calculator()

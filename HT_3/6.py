@@ -5,7 +5,7 @@
 # -  якщо довжина бульше 50 - > ваша фантазiя
 
 def string_calculation(my_string):
-	if 30 < len(my_string)<50:
+	if 30 < len(my_string) < 50:
 		print("Довжина рядка: ", len(my_string))
 		characters_count = 0
 		numbers_count = 0
