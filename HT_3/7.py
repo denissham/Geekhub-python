@@ -26,8 +26,11 @@ def calculator():
 			result = a - b
 			print(result)
 	elif operation == "/":
+		if 0 < b > 0:
 			result = a/b
 			print(result)
+		else:
+			print("Вибачайте, але на 0 не можна ділити")
 	else:
 			print("Соррян, я не настільки крутий, щоб порахувати те, що ви ввели!")
 	
