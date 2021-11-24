@@ -18,7 +18,7 @@ def string_calculation(my_string):
 		print("Kiлькiсть букв: ", characters_count)
 		print("Kiлькiсть цифр: ", numbers_count)
 
-	elif len(my_string) < 30:
+	elif len(my_string) <= 30:
 		characters_sum = ""
 		numbers_sum = 0
 		for j in my_string:
@@ -29,10 +29,10 @@ def string_calculation(my_string):
 		print("Сума всіх чисел:", numbers_sum)
 		print("Рядок без цифр:", characters_sum)
 
-	elif len(my_string) > 50:
+	elif len(my_string) >= 50:
 		revers_characters = ''.join(reversed(my_string))
 		print("Перевернутий рядок: ", revers_characters)
 
-my_string = str(input("Введіть деякий рядок букв та цифр: "))
+   
 
 string_calculation(my_string)
