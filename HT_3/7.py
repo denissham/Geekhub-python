@@ -10,6 +10,9 @@ def calculator():
 		except ValueError:
 			print("Ви ввели щось не зрозуміле")
 			continue
+		except KeyboardInterrupt:
+			print("Ви ввели щось не зрозуміле")
+			continue
 		else:
 			break
 
