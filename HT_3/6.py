@@ -33,6 +33,6 @@ def string_calculation(my_string):
 		revers_characters = ''.join(reversed(my_string))
 		print("Перевернутий рядок: ", revers_characters)
 
-   
+my_string = str(input("Введіть деякий рядок букв та цифр: "))   
 
 string_calculation(my_string)
