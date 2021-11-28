@@ -5,10 +5,7 @@
 # Параметр < percents > є необов'язковим і має значення по замовчуванню < 10 > (10%). 
 # Функція повинна принтануть і вернуть суму, яка буде на рахунку.
 
-def bank():
-	value = bank_value()
-	years = bank_years()
-	percents = bank_percents()
+def bank(value, years, percents = 10):
 	
 	for i in range(1, years+1):
 		years_percents = round(value * (percents/100), 2)
@@ -17,17 +14,11 @@ def bank():
 	print(value)
 	return
 
-def bank_value(value = int(input("Введіть сумму вкдаду: "))):
-	return value
-
-def bank_years(years = int(input("Введіть кількість років: "))):
-	return years
-
-def bank_percents():
-	try:
-		percents = int(input("Введіть кількість відсотків: "))
-	except:
-		percents = 10
-	return percents
-
-bank()
+value = int(input("Введіть сумму вкдаду: "))
+years = int(input("Введіть кількість років: "))
+percents = input("Введіть під який відсоток: ")
+if not percents:
+	bank(value, years)
+else:
+	percents = int(percents)
+	bank(value, years, percents)
