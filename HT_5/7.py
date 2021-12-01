@@ -21,7 +21,15 @@ def generator(my_list):
 			yield i
 		
 f = generator([1, 2, 3])
-while True:
-	print(next(f))
+
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
 
 
