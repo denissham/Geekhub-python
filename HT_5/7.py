@@ -20,7 +20,7 @@ def generator(my_list):
 		for i in my_list:
 			yield i
 		
-f = generator([1, 2, 3])
+f = generator([1, 2, 3, 4, 5])
 
 print(next(f))
 print(next(f))
