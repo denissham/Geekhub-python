@@ -53,8 +53,7 @@ def user_validation(users_list):
       password = i[1]
       try:
          validation(username, password)
-         
-         
+ 
       except MyErrorUsername as e:
          print(username)
          print(password)
