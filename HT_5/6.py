@@ -16,7 +16,7 @@ def func(start=0,stop=0,step=1):
 			yield result
 			result += step
 
-	elif step < 0 and stop >= 0:
+	elif step <= 0 and stop >= 0:
 		return False
 
 f = func(2,-10, -2)
