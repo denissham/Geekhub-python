@@ -19,7 +19,7 @@
 #       Red        Green
 #       .......
 
-def generator(auto, pedestrian):
+def traffic_light(auto, pedestrian):
 	while True:
 		count = 0
 		green_count = 0
@@ -84,7 +84,7 @@ def generator(auto, pedestrian):
 auto = ["Red","Red","Red","Red","Yellow","Yellow","Green","Green","Green","Green","Yellow","Yellow"]
 pedestrian = ["Green","Green","Green","Green","Green","Green","Red","Red","Red","Red","Red","Red"]
 
-f = generator(auto, pedestrian)
+f = traffic_light(auto, pedestrian)
 
 print(next(f))
 print(next(f))
