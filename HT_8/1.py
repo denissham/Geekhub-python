@@ -88,7 +88,7 @@ def withdrawal_balance(cash):
 			elif result >= 0:
 				test = countCurrency(appendix)
 				if test == False:
-					print("В банкоматі закінчились кошти")
+					print("В банкоматі закінчились кошти1")
 					answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 					if answer_work == "y":
 						menu(username, password)
@@ -96,24 +96,30 @@ def withdrawal_balance(cash):
 						print("Дякуємо, що скористались нашим банкоматом")
 						exit()
 				else:
-
+					temporary_cash_withdraw = {}
 					for key, value in test.items():
 
 						if int(cash[str(key)])>=value:
 							cash_counter = cash[str(key)]-value
-							cash[str(key)] = cash_counter
-							f = open("cash.data", "w")
-							json.dump(cash, f)
-							f.close()
 							new_appendix = appendix - (key*value)
+							temporary_cash_withdraw[str(key)] = cash_counter
 						else:
-							print("В банкоматі закінчились кошти")
-							answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
-							if answer_work == "y":
-								menu(username, password)
-							elif answer_work == "n":
-								print("Дякуємо, що скористались нашим банкоматом")
-								exit()
+							break
+
+					
+					if len(temporary_cash_withdraw) == len(test):
+						cash.update(temporary_cash_withdraw)
+						f = open("cash.data", "w")
+						json.dump(cash, f)
+						f.close()
+					else:
+						print("В банкоматі закінчились кошти")
+						answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
+						if answer_work == "y":
+							menu(username, password)
+						elif answer_work == "n":
+							print("Дякуємо, що скористались нашим банкоматом")
+							exit()	
 								
 
 			f = open(filename_balance, 'w')
