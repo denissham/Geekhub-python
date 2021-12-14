@@ -106,6 +106,14 @@ def withdrawal_balance(cash):
 							json.dump(cash, f)
 							f.close()
 							new_appendix = appendix - (key*value)
+						else:
+							print("В банкоматі закінчились кошти")
+							answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
+							if answer_work == "y":
+								menu(username, password)
+							elif answer_work == "n":
+								print("Дякуємо, що скористались нашим банкоматом")
+								exit()
 								
 
 			f = open(filename_balance, 'w')
