@@ -25,8 +25,15 @@ def menu(username, password):
 	role = login(username, password)
 	con = sqlite3.connect("bankomat.db")
 	cursor = con.cursor()
-	cursor.execute("SELECT banknotes FROM cash WHERE id ==1")
-	cash = cursor.fetchall()[0][0]
+	cursor.execute("SELECT * FROM cash")
+	cash_from_db = cursor.fetchall()
+	cash = {}
+	print(cash_from_db)
+	for i in cash_from_db:
+		a = i[0]
+		b = i[1]
+		cash[a]=b
+	print(cash)
 	con.close()
 	
 	if role == "incasator":
@@ -45,7 +52,7 @@ def menu(username, password):
 				exit()
 
 		elif action == 2:
-			adding_cash(cash, username)
+			adding_cash(username,password)
 
 	if role == "user":
 		print("""Введіть дію:
@@ -83,7 +90,7 @@ def withdrawal_balance(cash,username,password):
 				print("Ви привисили ліміт!")
 				answer = input("Бажаєте змінити сумму зняття коштів(y/n): ")
 				if answer == "y":
-					withdrawal_balance(cash,username)
+					withdrawal_balance(cash,username,password)
 				else:
 					answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 					if answer_work == "y":
@@ -102,7 +109,7 @@ def withdrawal_balance(cash,username,password):
 						print("Дякуємо, що скористались нашим банкоматом")
 						exit()
 				else:
-					cash_dict = ast.literal_eval(cash)
+					cash_dict = cash
 					temporary_cash_withdraw = {}
 					for key, value in test.items():
 
@@ -116,8 +123,12 @@ def withdrawal_balance(cash,username,password):
 					
 					if len(temporary_cash_withdraw) == len(test):
 						cash_dict.update(temporary_cash_withdraw)
-						cursor.execute(f"UPDATE cash SET banknotes = \"{cash_dict}\" WHERE id == 1")
-						con.commit()
+						for i,j in cash_dict.items():
+							cursor.execute(f"UPDATE cash SET value = \"{j}\" WHERE banknote == \"{i}\"")
+							con.commit()
+
+						# cursor.execute(f"UPDATE cash SET banknotes = \"{cash_dict}\" WHERE id == 1")
+						# con.commit()
 					
 					else:
 						print("В банкоматі закінчились кошти")
@@ -136,7 +147,7 @@ def withdrawal_balance(cash,username,password):
 			cursor.execute("INSERT INTO transactions (user_id,text_transaction) VALUES (?,?)", (id_db,transaction_value))
 			con.commit()
 			con.close()
-			print("Ви отримаэте гроші таких номиналів", test)
+			print("Ви отримаєте гроші таких номиналів", test)
 			answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 			if answer_work == "y":
 				menu(username, password)
@@ -148,7 +159,7 @@ def withdrawal_balance(cash,username,password):
 			print("Сумма повинна бути кратна 10")
 			answer = input("Бажаєте змінити сумму зняття коштів(y/n): ")
 			if answer == "y":
-				withdrawal_balance(cash,username)
+				withdrawal_balance(cash,username,password)
 			else:
 				answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 				if answer_work == "y":
@@ -225,14 +236,18 @@ def balance_check(username,password):
 		print("Дякуємо, що скористались нашим банкоматом")
 		exit()	
 
-def adding_cash(cash, username):
+def adding_cash(username,password):
 	con = sqlite3.connect("bankomat.db")
 	cursor = con.cursor()
-	cursor.execute("SELECT banknotes FROM cash WHERE id ==1")
-	str_cash = cursor.fetchall()[0][0]
-	cash = ast.literal_eval(str_cash)
+	cursor.execute("SELECT * FROM cash")
+	cash_from_db = cursor.fetchall()
+	cash = {}
 
-	
+	for i in cash_from_db:
+		a = i[0]
+		b = i[1]
+		cash[a]=b
+
 	banknote= input("Введіть у якої банкноти ви хочете змінити кількість: ")
 	banknote_count= int(input("Введіть кількість на яку треба Збільшити/Зменшити кількість банкнот(якщо зменшити введіть від'ємне значення): "))
 	if banknote in cash:
@@ -241,8 +256,10 @@ def adding_cash(cash, username):
 				result = value + banknote_count
 				cash[banknote] = result
 
-				cursor.execute(f"UPDATE cash SET banknotes = \"{cash}\" WHERE id == 1")
-				con.commit()
+				for i,j in cash.items():
+					cursor.execute(f"UPDATE cash SET value = \"{j}\" WHERE banknote == \"{i}\"")
+					con.commit()
+
 				if banknote_count >= 0:
 					text = "Кількість купюр було збільшено"
 				else:
@@ -251,18 +268,16 @@ def adding_cash(cash, username):
 				cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{username}%\";")
 				id_db = int(cursor.fetchall()[0][0])
 				transaction_value = str({text:[banknote,banknote_count]})
-
-				print(transaction_value)
 				cursor.execute("INSERT INTO transactions (user_id,text_transaction) VALUES (?,?)", (id_db,transaction_value))
 				con.commit()
 
 				answer = input("Бажаєте змінити кількість іншої банкноти(y/n): ")
 				if answer == "y":
-					cursor.execute("SELECT banknotes FROM cash WHERE id ==1")
-					str_cash = cursor.fetchall()[0][0]
-					cash = ast.literal_eval(str_cash)
+					# cursor.execute("SELECT banknotes FROM cash WHERE id ==1")
+					# str_cash = cursor.fetchall()[0][0]
+					# cash = ast.literal_eval(str_cash)
 					con.close()
-					adding_cash(cash, username)
+					adding_cash(username,password)
 				elif answer == "n":
 					answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 					con.close()
@@ -275,7 +290,7 @@ def adding_cash(cash, username):
 		print("Ви ввели не існуючу банкноту")
 		answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 		if answer_work == "y":
-				menu(username, role)
+				menu(username, password)
 		elif answer_work == "n":
 			print("Дякуємо, що скористались нашим банкоматом")
 			exit()
@@ -310,9 +325,14 @@ def login(username, password):
 def countCurrency(appendix,username):
 	con = sqlite3.connect("bankomat.db")
 	cursor = con.cursor()
-	cursor.execute("SELECT banknotes FROM cash WHERE id ==1")
-	str_cash = cursor.fetchall()[0][0]
-	cash = ast.literal_eval(str_cash)
+	cursor.execute("SELECT * FROM cash")
+	cash_from_db = cursor.fetchall()
+	cash = {}
+	for i in cash_from_db:
+		a = i[0]
+		b = i[1]
+		cash[a]=b
+	con.close()
 	test_notes = []
 	for key,value in cash.items():
 		if value > 0 :
@@ -354,4 +374,8 @@ def countCurrency(appendix,username):
 	else:
 		return False
 
+# withdrawal_balance("user1","user1")
 start()
+# adding_cash("admin")
+# countCurrency(160,"user1")
+# menu("user1", "user1")

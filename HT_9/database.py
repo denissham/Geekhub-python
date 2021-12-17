@@ -10,14 +10,14 @@ def data_base_create():
 		id integer PRIMARY KEY AUTOINCREMENT,
 		username text NOT NULL,
 		password text NOT NULL,
-		role text DEFAULT user
+		role text DEFAULT user,
+		UNIQUE(username,password)
 	);
-
 	''')
 
 	# ente data to users table
 	cur.execute("""
-	   	INSERT INTO users 
+	   	INSERT OR IGNORE INTO users 
 	    (username, password, role) 
 	    VALUES (
 	        'user1',
@@ -27,7 +27,7 @@ def data_base_create():
 	""")
 
 	insert_user2 = """
-	    INSERT INTO users 
+	    INSERT OR IGNORE INTO users 
 	    (username, password, role) 
 	    VALUES (
 	        'user2',
@@ -36,7 +36,7 @@ def data_base_create():
 	    )
 	"""
 	insert_user3 = """
-	    INSERT INTO users 
+	    INSERT OR IGNORE INTO users 
 	    (username, password, role) 
 	    VALUES (
 	        'admin',
@@ -45,33 +45,32 @@ def data_base_create():
 	    )
 	"""
 
-
 	cur.execute(insert_user2)
 	cur.execute(insert_user3)
-
 
 	# create balance table
 	cur.execute('''
 	CREATE TABLE IF NOT EXISTS balance (
-		user_id integer NOT NULL,
+		user_id integer,
 		amount integer NOT NULL DEFAULT 0,
+		UNIQUE(user_id)
 		FOREIGN KEY (user_id) REFERENCES users (id)
 	);
 	''')
 
 	insert_for_user1 = """
-	    INSERT INTO balance 
+	    INSERT OR IGNORE INTO balance 
 	    (user_id, amount) 
 	    VALUES (
-	       	2,
+	       	1,
 	        400
 	    )
 	"""
 	insert_for_user2 = """
-	    INSERT INTO balance 
+	    INSERT OR IGNORE INTO balance 
 	    (user_id, amount) 
 	    VALUES (
-	        3,
+	        2,
 	        600
 	    )
 	"""
@@ -81,15 +80,19 @@ def data_base_create():
 	# creating cash table
 	cur.execute('''
 	CREATE TABLE IF NOT EXISTS cash (
-		id integer NOT NULL,
-		banknotes text NOT NULL
-		
+		banknote text NOT NULL,
+		value integer NOT NULL,
+		UNIQUE(banknote)	
 	);
 	''')
-
-	str_cash = str({"10": 3, "20": 0, "50": 0, "100": 1, "200": 1, "500": 2, "1000": 5})
-	cur.execute("INSERT INTO cash (id,banknotes) VALUES (1,?)", [str_cash])
-
+	
+	cur.execute("INSERT OR IGNORE INTO cash (banknote, value) VALUES ('10',99)")
+	cur.execute("INSERT OR IGNORE INTO cash (banknote, value) VALUES ('20',99)")
+	cur.execute("INSERT OR IGNORE INTO cash (banknote, value) VALUES ('50',99)")
+	cur.execute("INSERT OR IGNORE INTO cash (banknote, value) VALUES ('100',99)")
+	cur.execute("INSERT OR IGNORE INTO cash (banknote, value) VALUES ('200',99)")
+	cur.execute("INSERT OR IGNORE INTO cash (banknote, value) VALUES ('500',99)")
+	cur.execute("INSERT OR IGNORE INTO cash (banknote, value) VALUES ('1000',99)")
 
 	# creating transactons table
 	cur.execute('''
