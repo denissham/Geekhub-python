@@ -28,12 +28,10 @@ def menu(username, password):
 	cursor.execute("SELECT * FROM cash")
 	cash_from_db = cursor.fetchall()
 	cash = {}
-	print(cash_from_db)
 	for i in cash_from_db:
 		a = i[0]
 		b = i[1]
 		cash[a]=b
-	print(cash)
 	con.close()
 	
 	if role == "incasator":
@@ -119,16 +117,12 @@ def withdrawal_balance(cash,username,password):
 							temporary_cash_withdraw[str(key)] = cash_counter
 						else:
 							break
-
 					
 					if len(temporary_cash_withdraw) == len(test):
 						cash_dict.update(temporary_cash_withdraw)
 						for i,j in cash_dict.items():
 							cursor.execute(f"UPDATE cash SET value = \"{j}\" WHERE banknote == \"{i}\"")
 							con.commit()
-
-						# cursor.execute(f"UPDATE cash SET banknotes = \"{cash_dict}\" WHERE id == 1")
-						# con.commit()
 					
 					else:
 						print("В банкоматі закінчились кошти")
@@ -273,9 +267,6 @@ def adding_cash(username,password):
 
 				answer = input("Бажаєте змінити кількість іншої банкноти(y/n): ")
 				if answer == "y":
-					# cursor.execute("SELECT banknotes FROM cash WHERE id ==1")
-					# str_cash = cursor.fetchall()[0][0]
-					# cash = ast.literal_eval(str_cash)
 					con.close()
 					adding_cash(username,password)
 				elif answer == "n":
@@ -374,8 +365,5 @@ def countCurrency(appendix,username):
 	else:
 		return False
 
-# withdrawal_balance("user1","user1")
 start()
-# adding_cash("admin")
-# countCurrency(160,"user1")
-# menu("user1", "user1")
+
