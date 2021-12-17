@@ -1,0 +1,2 @@
+requests==2.26.0
+texttable==1.6.4
