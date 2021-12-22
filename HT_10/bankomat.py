@@ -251,36 +251,51 @@ def adding_cash(username,password):
 	if banknote in cash:
 		for key, value in cash.items():
 			if key == banknote:
-				result = value + banknote_count
-				cash[banknote] = result
+				if value + banknote_count>=0:
+					result = value + banknote_count
+					cash[banknote] = result
 
-				for i,j in cash.items():
-					cursor.execute(f"UPDATE cash SET value = \"{j}\" WHERE banknote == \"{i}\"")
+					for i,j in cash.items():
+						cursor.execute(f"UPDATE cash SET value = \"{j}\" WHERE banknote == \"{i}\"")
+						con.commit()
+
+					if banknote_count >= 0:
+						text = "Кількість купюр було збільшено"
+					else:
+						text =  "Кількість купюр було зменшено"
+
+					cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{username}%\";")
+					id_db = int(cursor.fetchall()[0][0])
+					transaction_value = str({text:[banknote,banknote_count]})
+					cursor.execute("INSERT INTO transactions (user_id,text_transaction) VALUES (?,?)", (id_db,transaction_value))
 					con.commit()
 
-				if banknote_count >= 0:
-					text = "Кількість купюр було збільшено"
+					answer = input("Бажаєте змінити кількість іншої банкноти(y/n): ")
+					if answer == "y":
+						con.close()
+						adding_cash(username,password)
+					elif answer == "n":
+						answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
+						con.close()
+						if answer_work == "y":
+							menu(username, password)
+						elif answer_work == "n":
+							print("Дякуємо, що скористались нашим банкоматом")
+							exit()
 				else:
-					text =  "Кількість купюр було зменшено"
-
-				cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{username}%\";")
-				id_db = int(cursor.fetchall()[0][0])
-				transaction_value = str({text:[banknote,banknote_count]})
-				cursor.execute("INSERT INTO transactions (user_id,text_transaction) VALUES (?,?)", (id_db,transaction_value))
-				con.commit()
-
-				answer = input("Бажаєте змінити кількість іншої банкноти(y/n): ")
-				if answer == "y":
-					con.close()
-					adding_cash(username,password)
-				elif answer == "n":
-					answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
-					con.close()
-					if answer_work == "y":
-						menu(username, password)
-					elif answer_work == "n":
-						print("Дякуємо, що скористались нашим банкоматом")
-						exit()
+					print("Kількість зменшенння більша за кількість купюри")
+					answer = input("Бажаєте змінити кількість іншої банкноти(y/n): ")
+					if answer == "y":
+						con.close()
+						adding_cash(username,password)
+					elif answer == "n":
+						answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
+						con.close()
+						if answer_work == "y":
+							menu(username, password)
+						elif answer_work == "n":
+							print("Дякуємо, що скористались нашим банкоматом")
+							exit()
 	else:
 		print("Ви ввели не існуючу банкноту")
 		answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
