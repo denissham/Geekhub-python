@@ -14,8 +14,6 @@
 import json
 import requests
 import ast
-from datetime import datetime
-from datetime import timedelta, date
 
 def program():
 	url = "https://jsonplaceholder.typicode.com/users"
