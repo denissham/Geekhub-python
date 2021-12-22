@@ -123,14 +123,13 @@ def posts(selected_user):
 				comments = json.loads(response.text)
 				comments_ids = []
 				for comment in comments:
-					print(comment)
 					comments_ids.append(str(comment["id"]))
 
 				print(f"""ID поста: {post["id"]} 
-				Заголовок: {post["title"]}
-				Текст Поста: {post["body"]}
-				Кількість коментарів: {len(comments_ids)} 
-				ID коментарів: {comments_ids}""")
+Заголовок: {post["title"]}
+Текст Поста: {post["body"]}
+Кількість коментарів: {len(comments_ids)} 
+ID коментарів: {comments_ids}""")
 
 def todos(selected_user):			
 	print("""Введіть що саме ви хочете зробити:
