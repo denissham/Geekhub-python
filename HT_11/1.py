@@ -28,7 +28,9 @@ def program():
 		print(f"Name: {name};     Username: {username}")
 
 	selected_user = int(input("Введіть будь ласка id юзера: "))
+	menu(selected_user,users)
 	
+def menu(selected_user,users):
 	print("""Введіть який пункт меню ви хочете вибрати:
            1. Повна інформація про користувача
            2. Пости
@@ -40,7 +42,7 @@ def program():
 		user_info(users, selected_user)
 		action_return = input("Бажаєте продовжити роботу?(y/n): ")
 		if action_return == "y":
-			program()
+			menu(selected_user,users)
 		else:
 			exit()
 
@@ -48,7 +50,7 @@ def program():
 		posts(selected_user)
 		action_return = input("Бажаєте продовжити роботу?(y/n): ")
 		if action_return == "y":
-			program()
+			menu(selected_user,users)
 		else:
 			exit()
 
@@ -56,7 +58,7 @@ def program():
 		todos(selected_user)
 		action_return = input("Бажаєте продовжити роботу?(y/n): ")
 		if action_return == "y":
-			program()
+			menu(selected_user,users)
 		else:
 			exit()
 
@@ -68,7 +70,7 @@ def program():
 		print(r_image.headers['Location'])
 		action_return = input("Бажаєте продовжити роботу?(y/n): ")
 		if action_return == "y":
-			program()
+			menu(selected_user,users)
 		else:
 			exit()
 
@@ -134,7 +136,7 @@ ID коментарів: {comments_ids}""")
 def todos(selected_user):			
 	print("""Введіть що саме ви хочете зробити:
 	           1. Подивитись всі невиконані задачі користувача
-	           2. Подивитись всі невиконані задачі користувача""")
+	           2. Подивитись всі виконані задачі користувача""")
 	action_todo = int(input())
 	todo_url = f"https://jsonplaceholder.typicode.com/users/{selected_user}/todos"
 	response = requests.get(todo_url)
