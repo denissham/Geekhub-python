@@ -6,7 +6,6 @@ class Figure(object):
 
 	def __init__(self, new_color):
 		Figure.color = new_color
-		return Figure.color
 
 class Oval(Figure):
 	def __init__(self, oval_length, oval_width, new_color):

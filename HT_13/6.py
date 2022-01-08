@@ -3,16 +3,15 @@
 class Counter(object):
 	instance_count = 0
 	
-	def instance_counter(self):
+	def __init__(self):
 		Counter.instance_count += 1
-		return Counter.instance_count
 		
 
 instance1 = Counter()
-print(instance1.instance_counter())
+print(instance1.instance_count)
 instance2 = Counter()
-print(instance2.instance_counter())
+print(instance2.instance_count)
 instance3 = Counter()
-print(instance3.instance_counter())
+print(instance3.instance_count)
 instance4 = Counter()
-print(instance4.instance_counter())
+print(instance4.instance_count)
