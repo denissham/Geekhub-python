@@ -5,23 +5,22 @@ class Figure(object):
 	color = "white"
 
 	def change_color(self, new_color):
-		Figure.color = new_color
-		return Figure.color
+		self.color = new_color
+		
 
 class Oval(Figure):
 	def __init__(self, length, width):
-			self.__length = length
-			self.__width = width
+			self.length = length
+			self.width = width
 
 
 class Square(Figure):
 	def __init__(self, length_a):
-			self.__length_a = length_a
+			self.length_a = length_a
 
 oval = Oval(13,15)
+oval.change_color("red")
 print(oval.color)
 square = Square(12)
 print(square.color)
-			
-
 
