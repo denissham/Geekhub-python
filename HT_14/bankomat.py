@@ -29,7 +29,9 @@ class Menu(object):
 		if role == "incasator":
 			print("""Введіть дію:
 				1. Переглянути наявні купюри;
-				2. Змінити кількість купюр;""")
+				2. Змінити кількість купюр;
+				3. Додати нового користувача;
+				""")
 			action = int(input())
 			if action == 1:
 				print("Наявні банкноти в банкоматі: ")
@@ -43,6 +45,10 @@ class Menu(object):
 
 			elif action == 2:
 				atm.adding_cash(username, password, role)
+
+			elif action == 3:
+				user_credentials.add_user(username, password, role)
+
 
 		if role == "user":
 			print("""Введіть дію:
@@ -383,12 +389,48 @@ class Bankomat(object):
 			print("Дякуємо, що скористались нашим банкоматом")
 			exit()
 
-class Authorization(object):
+class Person(object):
 
 	def start(self):
 		username = str(input("Введіть будь ласка Юзернейм: "))
 		password = str(input("Введіть будь ласка Пасворд: "))
 		return username, password
+
+	def add_user(self, username, password, role):
+		con = sqlite3.connect("bankomat.db")
+		cursor = con.cursor()
+		new_username = str(input("Введіть будь ласка Юзернейм нового користувача: "))
+		new_password = str(input("Введіть будь ласка Пасворд нового користувача: "))
+		new_role = str(input("Введіть будь ласка Роль нового користувача: "))
+		cursor.execute("INSERT OR IGNORE INTO users (username, password, role) VALUES (?, ?, ?)", (new_username, new_password, new_role))
+		con.commit()
+		cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{new_username}%\";")
+		id_db = cursor.fetchall()[0][0]
+		insert_for_user = f"""
+		    INSERT OR IGNORE INTO balance 
+		    (user_id, amount) 
+		    VALUES (
+		        {id_db},
+		        0
+		    )
+		"""
+		cursor.execute(insert_for_user)
+		con.commit()
+		answer = input("Бажаєте додати ще одного користувача(y/n): ")
+		if answer == "y":
+			
+			self.add_user(username, password, role)
+		elif answer == "n":
+			con.close()
+			answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
+			if answer_work == "y":
+				atm_menu.menu(username, password, role)
+			elif answer_work == "n":
+				print("Дякуємо, що скористались нашим банкоматом")
+				exit()
+
+
+class Auth(Person):
 
 	def login(self, username, password):
 
@@ -419,7 +461,7 @@ class Authorization(object):
 db = database.Database()
 db.data_base_create()
 
-user_credentials = Authorization()
+user_credentials = Auth()
 a = user_credentials.start()
 user = user_credentials.login(a[0],a[1])
 
