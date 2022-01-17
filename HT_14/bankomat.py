@@ -1,30 +1,30 @@
 # 1. Доповніть програму-банкомат наступним функціоналом:
 #    - новий пункт меню, який буде виводити поточний курс валют (API Приватбанк)
 
-import sqlite3
+
 import csv
+import ast
 import json
 import pickle
-import ast
-import database
+import sqlite3
+
 import requests
 from texttable import Texttable
-import ast
+
+
+import database
 
 class Menu(object):
 
 	def menu(self, username, password, role):
 
-		con = sqlite3.connect("bankomat.db")
-		cursor = con.cursor()
-		cursor.execute("SELECT * FROM cash")
-		cash_from_db = cursor.fetchall()
+		cash_from_db = database.Database().get_cash()
 		cash = {}
 		for i in cash_from_db:
 			a = i[0]
 			b = i[1]
 			cash[a]=b
-		con.close()
+		
 		
 		if role == "incasator":
 			print("""Введіть дію:
@@ -83,12 +83,8 @@ class Bankomat(object):
 		appendix = int(input("Скільки грошей ви хочете зняти?: "))
 		if appendix >= 0:
 			if appendix % 10 == 0:
-				con = sqlite3.connect("bankomat.db")
-				cursor = con.cursor()
-				cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{username}%\";")
-				id_db = cursor.fetchall()[0][0]
-				cursor.execute(f"SELECT amount FROM balance WHERE user_id LIKE \"%{id_db}%\";")
-				balance = cursor.fetchall()[0][0]
+				id_db = database.Database().get_user_id(username)
+				balance = database.Database().get_user_balance(id_db)
 				result = balance - appendix
 				if result < 0:
 					print("Ви привисили ліміт!")
@@ -127,8 +123,7 @@ class Bankomat(object):
 						if len(temporary_cash_withdraw) == len(test):
 							cash_dict.update(temporary_cash_withdraw)
 							for i,j in cash_dict.items():
-								cursor.execute(f"UPDATE cash SET value = \"{j}\" WHERE banknote == \"{i}\"")
-								con.commit()
+								database.Database().update_cash(i, j)
 						
 						else:
 							print("В банкоматі закінчились кошти")
@@ -140,13 +135,10 @@ class Bankomat(object):
 								exit()	
 									
 
-				cursor.execute(f"UPDATE balance SET amount = \"{result}\" WHERE user_id == \"{id_db}\"")
-				con.commit()
+				database.Database().update_balance(result, id_db)
 				text = "Гроші було знято"
 				transaction_value = str({text:appendix})
-				cursor.execute("INSERT INTO transactions (user_id,text_transaction) VALUES (?,?)", (id_db,transaction_value))
-				con.commit()
-				con.close()
+				database.Database().write_transaction(id_db, transaction_value)
 				print("Ви отримаєте гроші таких номиналів", test)
 				answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 				if answer_work == "y":
@@ -173,20 +165,13 @@ class Bankomat(object):
 		appendix = int(input("Скільки грошей ви хочете додати?: "))
 		if appendix >= 0:
 			if appendix % 10 == 0:
-				con = sqlite3.connect("bankomat.db")
-				cursor = con.cursor()
-				cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{username}%\";")
-				id_db = cursor.fetchall()[0][0]
-				cursor.execute(f"SELECT amount FROM balance WHERE user_id LIKE \"%{id_db}%\";")
-				balance = cursor.fetchall()[0][0]
+				id_db = database.Database().get_user_id(username)
+				balance = database.Database().get_user_balance(id_db)
 				result = balance + appendix
-				cursor.execute(f"UPDATE balance SET amount = \"{result}\" WHERE user_id == \"{id_db}\"")
-				con.commit()
+				database.Database().update_balance(result, id_db)
 				text = "Гроші було додано"
 				transaction_value = str({text:appendix})
-				cursor.execute("INSERT INTO transactions (user_id,text_transaction) VALUES (?,?)", (id_db,transaction_value))
-				con.commit()
-				con.close()
+				database.Database().write_transaction(id_db, transaction_value)
 
 				answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 				if answer_work == "y":
@@ -221,13 +206,8 @@ class Bankomat(object):
 
 
 	def balance_check(self, username, password, role):
-		con = sqlite3.connect("bankomat.db")
-		cursor = con.cursor()
-		cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{username}%\";")
-		id_db = cursor.fetchall()[0][0]
-		cursor.execute(f"SELECT amount FROM balance WHERE user_id LIKE \"%{id_db}%\";")
-		result = cursor.fetchall()[0][0]
-		con.close()
+		id_db = database.Database().get_user_id(username)
+		result = database.Database().get_user_balance(id_db)
 		print("Ваш баланс: ", result)
 		answer = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 		if answer == "y":
@@ -237,10 +217,7 @@ class Bankomat(object):
 			exit()	
 
 	def adding_cash(self,username,password, role):
-		con = sqlite3.connect("bankomat.db")
-		cursor = con.cursor()
-		cursor.execute("SELECT * FROM cash")
-		cash_from_db = cursor.fetchall()
+		cash_from_db = database.Database().get_cash()
 		cash = {}
 
 		for i in cash_from_db:
@@ -258,27 +235,22 @@ class Bankomat(object):
 						cash[banknote] = result
 
 						for i,j in cash.items():
-							cursor.execute(f"UPDATE cash SET value = \"{j}\" WHERE banknote == \"{i}\"")
-							con.commit()
+							database.Database().update_cash(i, j)
 
 						if banknote_count >= 0:
 							text = "Кількість купюр було збільшено"
 						else:
 							text =  "Кількість купюр було зменшено"
 
-						cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{username}%\";")
-						id_db = int(cursor.fetchall()[0][0])
+						id_db = database.Database().get_user_id(username)
 						transaction_value = str({text:[banknote,banknote_count]})
-						cursor.execute("INSERT INTO transactions (user_id,text_transaction) VALUES (?,?)", (id_db,transaction_value))
-						con.commit()
+						database.Database().write_transaction(id_db, transaction_value)
 
 						answer = input("Бажаєте змінити кількість іншої банкноти(y/n): ")
 						if answer == "y":
-							con.close()
 							self.adding_cash(username, password, role)
 						elif answer == "n":
 							answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
-							con.close()
 							if answer_work == "y":
 								atm_menu.menu(username, password, role)
 							elif answer_work == "n":
@@ -288,11 +260,9 @@ class Bankomat(object):
 						print("Kількість зменшенння більша за кількість купюри")
 						answer = input("Бажаєте змінити кількість іншої банкноти(y/n): ")
 						if answer == "y":
-							con.close()
 							self.adding_cash(username, password, role)
 						elif answer == "n":
 							answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
-							con.close()
 							if answer_work == "y":
 								atm_menu.menu(username, password, role)
 							elif answer_work == "n":
@@ -310,16 +280,12 @@ class Bankomat(object):
 				exit()
 
 	def countCurrency(self, appendix, username):
-		con = sqlite3.connect("bankomat.db")
-		cursor = con.cursor()
-		cursor.execute("SELECT * FROM cash")
-		cash_from_db = cursor.fetchall()
+		cash_from_db = database.Database().get_cash()
 		cash = {}
 		for i in cash_from_db:
 			a = i[0]
 			b = i[1]
 			cash[a]=b
-		con.close()
 		test_notes = []
 		for key,value in cash.items():
 			if value > 0 :
@@ -397,31 +363,15 @@ class Person(object):
 		return username, password
 
 	def add_user(self, username, password, role):
-		con = sqlite3.connect("bankomat.db")
-		cursor = con.cursor()
 		new_username = str(input("Введіть будь ласка Юзернейм нового користувача: "))
 		new_password = str(input("Введіть будь ласка Пасворд нового користувача: "))
 		new_role = str(input("Введіть будь ласка Роль нового користувача: "))
-		cursor.execute("INSERT OR IGNORE INTO users (username, password, role) VALUES (?, ?, ?)", (new_username, new_password, new_role))
-		con.commit()
-		cursor.execute(f"SELECT id FROM users WHERE username LIKE \"%{new_username}%\";")
-		id_db = cursor.fetchall()[0][0]
-		insert_for_user = f"""
-		    INSERT OR IGNORE INTO balance 
-		    (user_id, amount) 
-		    VALUES (
-		        {id_db},
-		        0
-		    )
-		"""
-		cursor.execute(insert_for_user)
-		con.commit()
+		database.Database().add_new_user(new_username, new_password, new_role)
 		answer = input("Бажаєте додати ще одного користувача(y/n): ")
 		if answer == "y":
 			
 			self.add_user(username, password, role)
 		elif answer == "n":
-			con.close()
 			answer_work = input("Бажаєте продовжити роботу з банкоматом(y/n): ")
 			if answer_work == "y":
 				atm_menu.menu(username, password, role)
@@ -434,15 +384,10 @@ class Auth(Person):
 
 	def login(self, username, password):
 
-		con = sqlite3.connect("bankomat.db")
-		cursor = con.cursor()
 		try:
-			cursor.execute(f"SELECT username FROM users WHERE username LIKE \"%{username}%\";")
-			username_db = cursor.fetchall()[0][0]
-			cursor.execute(f"SELECT password FROM users WHERE username LIKE \"%{username}%\";")
-			password_db = cursor.fetchall()[0][0]
-			cursor.execute(f"SELECT role FROM users WHERE username LIKE \"%{username}%\";")
-			role_db = cursor.fetchall()[0][0]
+			username_db = database.Database().get_username(username)
+			password_db = database.Database().get_password(username)
+			role_db = database.Database().get_role(username)
 			if username == username_db and password == password_db:
 				if role_db=="incasator":
 					role = role_db
@@ -453,9 +398,6 @@ class Auth(Person):
 		except Exception as e:
 			print("Введені данні не вірні")
 			exit()
-
-		con.commit()
-		con.close()
 
 
 db = database.Database()
