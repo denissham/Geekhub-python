@@ -30,9 +30,9 @@ class VikkaBotSpider(scrapy.Spider):
 		if date_result == True and isValidDate == True:
 			date_news_url = f"https://www.vikka.ua/{self.entered_date}/"
 			yield scrapy.Request(
-    			url = date_news_url,
-    			callback =self.parse_news_list
-    			)
+				url = date_news_url,
+				callback =self.parse_news_list
+				)
 		else:
 			print("Sorry but you entered future date or enered some no correct date. There are no news for the future.")
 		
@@ -43,9 +43,18 @@ class VikkaBotSpider(scrapy.Spider):
 			news_data = news.select_one("a[href]")
 			news_link = news_data.get('href')
 			yield scrapy.Request(
-    			url = news_link,
-    			callback =self.parse_news
-    			)
+				url = news_link,
+				callback =self.parse_news
+				)
+
+		
+		next_a_section = soup.select_one('a.next.page-numbers')
+		next_link  = next_a_section.get('href')
+		if next_link is not None:
+			yield scrapy.Request(
+				url = next_link,
+				callback =self.parse_news_list
+				)
 
 	def parse_news(self, response):
 		item = BotItem()
@@ -72,34 +81,8 @@ class VikkaBotSpider(scrapy.Spider):
 		item["news_url"] = news_url
 		item["news_date"] = self.entered_date
 
-		# return item
+		yield item
 		
-
-
-	# 	self.write_to_csv(news_title_text, news_description_text, tags_string, news_url)
-
-	# def write_to_csv(self, news_title_text, news_description_text, tags_string, news_url):
-	# 	filename_date = self.entered_date
-	# 	filename_date = filename_date.replace("/", "-")
-	# 	file_check = os.path.isfile(f"./{filename_date}.csv")
-	# 	counter = 1
-	# 	headersCSV = ['News_title', 'News_Description', 'News_Tags', 'News_URL' ]
-	# 	dict = {'News_title': news_title_text, 'News_Description': news_description_text, 'News_Tags': tags_string, 'News_URL': news_url}
-	# 	if file_check == True and self.counter == 1:
-			
-	# 		with open(f'{filename_date}.csv', 'w', newline='') as f_object:
-	# 			dictwriter_object = DictWriter(f_object, fieldnames=headersCSV)
-	# 			dictwriter_object.writerow(dict)
-	# 			f_object.close()
-
-	# 		self.counter += 1
-			
-	# 	else:
-
-	# 		with open(f'{filename_date}.csv', 'a', newline='') as f_object:
-	# 			dictwriter_object = DictWriter(f_object, fieldnames=headersCSV)
-	# 			dictwriter_object.writerow(dict)
-	# 			f_object.close()
 
 			    
 

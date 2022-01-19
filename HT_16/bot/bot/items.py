@@ -7,9 +7,9 @@ import scrapy
 
 
 class BotItem(scrapy.Item):
-  
-    news_title = scrapy.Field()
-    news_description = scrapy.Field()
-    tags_string = scrapy.Field()
-    news_url = scrapy.Field()
-    news_date = scrapy.Field()
+	
+	news_title = scrapy.Field()
+	news_description = scrapy.Field()
+	tags_string = scrapy.Field()
+	news_url = scrapy.Field()
+	news_date = scrapy.Field()
