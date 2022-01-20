@@ -30,9 +30,10 @@ class BotPipeline:
 			)""")
 
 	def process_item(self, item, spider):
-		
+
 		self.cur.execute("INSERT OR IGNORE INTO news (title, description, tags, url, news_date) VALUES (?,?,?,?,?)", 
 			(item["news_title"], item["news_description"], item["tags_string"], item["news_url"], item["news_date"]))
 		self.con.commit()
+		self.con.close()
 
 		return item
