@@ -14,19 +14,25 @@
 
 import requests
 import os.path
+import sys
 
 from csv import DictWriter
 
 
 class NewsScraper(object):
-	def __init__(self):
-		helo_text = ("Введіть будь ласка Категорію для пошуку"
-		"(askstories, showstories, newstories, jobstories): ") 
-		self.category = str(input(helo_text))
-		self.availability = self.start(self.category)
-		self.category_list = self.get_stories_list()
-		self.story = self.get_story()
-		self.write = self.write_csv()
+	def __init__(self): 
+		if len(sys.argv)>2:
+			self.category = sys.argv[1]
+			self.availability = self.start(self.category)
+			self.category_list = self.get_stories_list()
+			self.story = self.get_story()
+			self.write = self.write_csv()
+		else:
+			self.category = ""
+			self.availability = self.start(self.category)
+			self.category_list = self.get_stories_list()
+			self.story = self.get_story()
+			self.write = self.write_csv()
 	def start(self, category):
 		available_category = ['askstories', 'showstories', 'newstories', 'jobstories']
 		if len(category) == 0:
@@ -52,7 +58,6 @@ class NewsScraper(object):
 		counter = 1
 		headersCSV = ['id', 'deleted', 'type', 'by', 'time', 'text', 'dead',
 		'parent', 'poll', 'kids', 'url', 'score', 'title', 'parts', 'descendants']
-		print(headersCSV)
 		for story in self.story:
 			if file_check == True and counter == 1:
 				with open(f'{self.category}.csv', 'w', newline='') as f_object:
@@ -66,4 +71,7 @@ class NewsScraper(object):
 					dictwriter_object.writerow(story)
 					f_object.close()
 
-category_data = NewsScraper()
+if __name__ == '__main__':
+
+	category_data = NewsScraper()
+   
