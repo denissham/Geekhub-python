@@ -35,52 +35,64 @@ def get_stories_list(category_list):
 def write_db(category_name,stories_list):
 	if category_name == "askstories":
 		for story in stories_list:
-			print(story.get('id'))
-			obj = Ask.objects.get_or_create(
-				story_id = story.get('id'),
-				story_type = story.get('type'),
-				by = story.get('by'),
-				timestamp = story.get('time'),
-				title = story.get('title'),
-				text = story.get('text'),
-				url = story.get('url'),
-				)
+			try:
+				story_in_db_check = Ask.objects.get(story_id = story["id"])
+			except:
+				print(story.get('id'))
+				obj = Ask.objects.get_or_create(
+					story_id = story.get('id'),
+					story_type = story.get('type'),
+					by = story.get('by'),
+					timestamp = story.get('time'),
+					title = story.get('title'),
+					text = story.get('text'),
+					url = story.get('url'),
+					)
 
 	elif category_name =="showstories":
 		for story in stories_list:
-			print(story.get('id'))
-			obj = Show.objects.get_or_create(
-				story_id = story.get('id'),
-				story_type = story.get('type'),
-				by = story.get('by'),
-				timestamp = story.get('time'),
-				title = story.get('title'),
-				text = story.get('text'),
-				url = story.get('url'),
-				)
+			try:
+				story_in_db_check = Show.objects.get(story_id = story["id"])
+			except:
+				print(story.get('id'))
+				obj = Show.objects.get_or_create(
+					story_id = story.get('id'),
+					story_type = story.get('type'),
+					by = story.get('by'),
+					timestamp = story.get('time'),
+					title = story.get('title'),
+					text = story.get('text'),
+					url = story.get('url'),
+					)
 
 	elif category_name =="jobstories":
 		for story in stories_list:
-			print(story.get('id'))
-			obj = Job.objects.get_or_create(
-				story_id = story.get('id'),
-				story_type = story.get('type'),
-				by = story.get('by'),
-				timestamp = story.get('time'),
-				title = story.get('title'),
-				text = story.get('text'),
-				url = story.get('url'),
-				)
+			try:
+				story_in_db_check = Job.objects.get(story_id = story["id"])
+			except:
+				print(story.get('id'))
+				obj = Job.objects.get_or_create(
+					story_id = story.get('id'),
+					story_type = story.get('type'),
+					by = story.get('by'),
+					timestamp = story.get('time'),
+					title = story.get('title'),
+					text = story.get('text'),
+					url = story.get('url'),
+					)
 
 	elif category_name == "newstories":
 		for story in stories_list:
-			print(story.get('id'))
-			obj = New.objects.get_or_create(
-				story_id = story.get('id'),
-				story_type = story.get('type'),
-				by = story.get('by'),
-				timestamp = story.get('time'),
-				title = story.get('title',),
-				text = story.get('text'),
-				url = story.get('url'),
-				)
+			try:
+				story_in_db_check = New.objects.get(story_id = story["id"])
+			except:
+				print(story.get('id'))
+				obj = New.objects.get_or_create(
+					story_id = story.get('id'),
+					story_type = story.get('type'),
+					by = story.get('by'),
+					timestamp = story.get('time'),
+					title = story.get('title',),
+					text = story.get('text'),
+					url = story.get('url'),
+					)
