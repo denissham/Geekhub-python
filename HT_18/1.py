@@ -12,16 +12,18 @@
 # назву HTML тега і за допомогою регулярного виразу видаляти цей тег разом із усим його вмістом із значення атрибута "text"
 # (якщо він існує) отриманого запису.
 
-import requests
-import os.path
 import sys
+import time
+import calendar
+import requests
 
 from csv import DictWriter
 
 
 class NewsScraper(object):
+
 	def __init__(self): 
-		if len(sys.argv)>2:
+		if len(sys.argv) >= 2:
 			self.category = sys.argv[1]
 			self.availability = self.start(self.category)
 			self.category_list = self.get_stories_list()
@@ -33,6 +35,7 @@ class NewsScraper(object):
 			self.category_list = self.get_stories_list()
 			self.story = self.get_story()
 			self.write = self.write_csv()
+
 	def start(self, category):
 		available_category = ['askstories', 'showstories', 'newstories', 'jobstories']
 		if len(category) == 0:
@@ -40,11 +43,13 @@ class NewsScraper(object):
 		elif category not in available_category:
 			print("Sorry you entered not available category!")
 			exit()
+
 	def get_stories_list(self):
 		url = f"https://hacker-news.firebaseio.com/v0/{self.category}.json?print=pretty"
 		r = requests.get(url)
 		response_value = r.json()
 		return response_value
+
 	def get_story(self):
 		stories_list = []
 		for story in self.category_list:
@@ -52,25 +57,23 @@ class NewsScraper(object):
 			story_response = requests.get(story_url)
 			story_data = story_response.json()
 			stories_list.append(story_data)
-		return stories_list	
-	def write_csv(self):
-		file_check = os.path.isfile(f"./{self.category}.csv")
-		counter = 1
-		headersCSV = ['id', 'deleted', 'type', 'by', 'time', 'text', 'dead',
-		'parent', 'poll', 'kids', 'url', 'score', 'title', 'parts', 'descendants']
-		for story in self.story:
-			if file_check == True and counter == 1:
-				with open(f'{self.category}.csv', 'w', newline='') as f_object:
-					dictwriter_object = DictWriter(f_object, fieldnames=headersCSV)
-					dictwriter_object.writerow(story)
-					f_object.close()
-				counter += 1
-			else:
-				with open(f'{self.category}.csv', 'a', newline='') as f_object:
-					dictwriter_object = DictWriter(f_object, fieldnames=headersCSV)
-					dictwriter_object.writerow(story)
-					f_object.close()
+		return stories_list
 
+	def write_csv(self):
+		keys_set=set()
+		ts = calendar.timegm(time.gmtime())
+		for story in self.story:
+				for key, value in story.items():
+					keys_set.add(key)
+
+		with open(f'{self.category}{ts}.csv', 'a', newline='') as f_object:
+			dictwriter_object = DictWriter(f_object, fieldnames=sorted(keys_set))
+			dictwriter_object.writeheader()
+			for story in self.story:
+				dictwriter_object.writerow(story)
+
+		f_object.close()	
+		
 if __name__ == '__main__':
 
 	category_data = NewsScraper()
