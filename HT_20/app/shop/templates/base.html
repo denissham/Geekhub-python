@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% for message in messages %}
+     <script>
+        alert('{{ message }}');
+        </script>
+{% endfor %}
+<div id="header">
+    {% block header %}
+    {% endblock %}
+</div>
+
+<div id="content">
+    {% block content %}
+
+    {% endblock %}
+</div>
+</body>
+</html>

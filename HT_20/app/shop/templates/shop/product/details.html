@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+    <div class="product-details">
+        <h1>{{ product.name }}</h1>
+        <h2>{{ product.category_fk }}</h2>
+        <h3>{{ product.sku }}</h3>
+        <p class="price">${{ product.price }}</p>
+        {{ product.description|linebreaks }}
+    </div>
+{% if role == "superuser" %}
+    <span class="Edit"><a href="../edit/{{ product.id }}">
+       <button>Edit Item</button></a>
+    </span>
+    <span class="Remove"><a href="../remove/{{ product.id }}">
+       <button>Remove Item</button></a>
+    </span>
+{% elif role == "user" %}
+    <span class="AddToCart"><a href="../add_to_cart/{{ product.id }}">
+       <button>Add to Cart</button></a>
+    </span>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,486 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"in",
+				"input_field"
+			],
+			[
+				"Chrome",
+				"ChromeOptions"
+			],
+			[
+				"date",
+				"date_result"
+			],
+			[
+				"men",
+				"Menu"
+			],
+			[
+				"m",
+				"myLibrary"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"print",
+				"print_name"
+			],
+			[
+				"ac",
+				"action_post_id"
+			],
+			[
+				"r",
+				"r_image"
+			],
+			[
+				"dt",
+				"dt_yesterday"
+			],
+			[
+				"end",
+				"end_dt"
+			],
+			[
+				"id",
+				"id_db"
+			],
+			[
+				"inser",
+				"insert_user3"
+			],
+			[
+				"inse",
+				"insert_user1"
+			],
+			[
+				"key",
+				"key_for_count"
+			],
+			[
+				"va",
+				"value_for_count"
+			],
+			[
+				"A",
+				"append"
+			],
+			[
+				"an",
+				"answer_work"
+			],
+			[
+				"csv",
+				"csv_row"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
+				"th",
+				"third_check"
+			],
+			[
+				"pas",
+				"password_validation"
+			],
+			[
+				"use",
+				"username_validation"
+			],
+			[
+				"try",
+				"try\tTry/Except/Else"
+			],
+			[
+				"p",
+				"print"
+			],
+			[
+				"y",
+				"years_percents"
+			],
+			[
+				"ba",
+				"bank_percents"
+			],
+			[
+				"в",
+				"ввели"
+			],
+			[
+				"func",
+				"function_2"
+			],
+			[
+				"my",
+				"my_input"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/settings.py",
+			"settings":
+			{
+				"buffer_size": 3239,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Denis/Desktop/AWS.txt",
+			"settings":
+			{
+				"buffer_size": 955,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19/app/app/settings.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19/app/scraper/views.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19/app/manage.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/showstories1643834272.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/askstories1643834043.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/newstories2.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/newstories3.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/newstories4.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/jobstories1643833678.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/showstories.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/newstories.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/app/local_settings.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/app/settings.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/scraper/admin.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/app/urls.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/scraper/urls.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/requirements.txt",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/scraper/templates/scraper/index.html",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/scraper/models.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/scraper/views.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_19_2/app/manage.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/bot/bot/settings.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/test/mysite/polls/templates/polls/index.html",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_16/bot/bot/items.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_17/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_18/askstories.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/test/mysite/polls/templates/polls/detail.html",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_16/bot/bot/settings.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_13/5.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/bot/2021-12-26.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/bot/2022-01-12.csv",
+		"/C/Users/Denis/Desktop/testtest",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_16/vikka_bot.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/bot/bot/spiders/vikka_bot.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/tutorial/tutorial/spiders/quotes_spider.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/bot/2021-21-26.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_13/4.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_4/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_3/4.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_3/2.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_3/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_13/7.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_13/6.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_14/bankomat.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_13/3.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_13/2.py",
+		"/C/Users/Denis/Desktop/Дз",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_13/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_11/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_7/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/tutorial/scrapy.cfg",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_15/tutorial/tutorial/spiders/__init__.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_12/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_2/8.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_2/1.py",
+		"/C/Users/Denis/Documents/Test/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_12/database.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_10/database.py",
+		"//wsl.localhost/Ubuntu/home/shamd1989/.local/lib/python3.8/site-packages/docx/table.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/cash.data",
+		"//wsl.localhost/Ubuntu/home/shamd1989/.local/lib/python3.8/site-packages/SeleniumLibrary/keywords/element.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_9/bankomat.db",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_9/bankomat.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_12/QuotesCSV.csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_12/requirements.txt",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_10/requirements.txt",
+		"/C/Users/Denis/Documents/Test/requirements.txt",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_10/2.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_10/3.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_9/database.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_10/bankomat.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_9/DB.py",
+		"/C/Users/Denis/Documents/xolv.pub",
+		"/C/Users/Denis/Documents/xolv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/test4.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/test3.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/3.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_1/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_1/2.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_1/4.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_1/3.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_1/5.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_1/6.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_6/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_2/2.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_2/3.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_2/4.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_5/2.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_5/7.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_2/5.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_2/6.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_2/7.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_5/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_4/2.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_3/3.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_3/5.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_9/1.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/test_transactions.data",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/test_balance.data",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/admin_transactions.data",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/user_balance.data",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/user_transactions.data",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/2.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_8/users.data",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_5/4.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_5/5.py",
+		"/C/Users/Denis/Downloads/check_int.txt",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_7/test2.txt",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_7/test.txt",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_7/2.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_3/7.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_3/6.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_7/test_transactions.data",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_7/user_transactions.data",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_6/11.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_6/New Text Document.txt",
+		"/C/Users/Denis/Downloads/PractImport_DenysNov2021_1 (1).csv",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_4/8.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_4/7.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_4/6.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_4/5.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_4/4.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_4/3.py",
+		"/C/Users/Denis/Documents/Geekhub/geekhub-python/HT_5/222.py",
+		"/C/Users/Denis/Desktop/Test"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/settings.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3239,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/Denis/Desktop/AWS.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 955,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28,
+								28
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 40.8
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "manage.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

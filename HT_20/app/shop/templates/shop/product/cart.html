@@ -1,0 +1,10 @@
+{% extends 'main/base.html' %}
+{% block header %}
+    <span class="logo">Cart</span>
+{% endblock %}
+{% block content %}
+    {% for user_cart in product %}
+        <h3>{{user_cart.product}}</h3>
+        <br>
+    {% endfor %}
+{% endblock %}
