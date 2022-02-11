@@ -17,9 +17,15 @@
     <span class="Remove"><a href="../remove/{{ product.id }}">
        <button>Remove Item</button></a>
     </span>
+    <a href="../../" name="back" value="None">Back</a>
 {% elif role == "user" %}
     <span class="AddToCart"><a href="../add_to_cart/{{ product.id }}">
        <button>Add to Cart</button></a>
+        <a href="../../" name="back" value="None">Back</a>
+    </span>
+{% elif role == None %}
+    <span class="Back">
+        <a href="../../" name="back" value="None">Back</a>
     </span>
 {% endif %}
 
