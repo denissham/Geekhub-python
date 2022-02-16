@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+ul {
+      list-style: none;
+    }
+
+ul li::before {
+      content: "\2022";
+      color: red;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+</style>
+</head>
+<body>
+<a href="{% url 'shop:cart' %}">Cart</a>
+<br>
+
+<div id="header">
+    {% block header %}
+    {% endblock %}
+</div>
+
+<div id="content">
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+{% if messages %}
+<ul class="messages" >
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+</body>
+</html>

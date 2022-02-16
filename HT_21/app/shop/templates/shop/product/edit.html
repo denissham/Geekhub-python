@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="Edit">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.name }}<br>
+            {{ form.sku }}<br>
+            {{ form.price }}<br>
+            {{ form.description }}<br>
+
+            <button class="Submit">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}

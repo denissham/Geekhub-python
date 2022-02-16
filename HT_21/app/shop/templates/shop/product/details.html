@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+    <div class="product-details">
+        <h1>{{ product.name }}</h1>
+        <h2>{{ product.category_fk }}</h2>
+        <h3>{{ product.sku }}</h3>
+        <p class="price">${{ product.price }}</p>
+        {{ product.description|linebreaks }}
+    </div>
+{% if role == "superuser" %}
+    <span class="Edit"><a href="../edit/{{ product.id }}">
+       <button>Edit Item</button></a>
+    </span>
+    <span class="Remove"><a href="../remove/{{ product.id }}">
+       <button>Remove Item</button></a>
+    </span>
+    <a href="../../" name="back" value="None">Back</a>
+{% elif role == "user" %}
+    <span class="AddToCart">{% if product.quantity > 0 %}
+
+        <form action="{% url 'shop:add_to_cart' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit" data-href="{% url 'shop:add_to_cart' %}">Add to Cart</button>
+        </form>
+        {% else %}Product is out of stock{% endif %}
+    </span>
+{% elif role == None %}
+    <span class="Back">
+        <a href="../../" name="back" value="None">Back</a>
+    </span>
+{% endif %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    var addToCartUrl = "{% url 'shop:add_to_cart' %}";
+    csrfToken = "{{ csrf_token }}"
+    var addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+    addToCartBtns.onclick = function(event) {
+        var productId = event.target.dataset.productid;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", addToCartUrl);
+        xmlhttp.setRequestHeader("Content-Type", "application/json");
+        xmlhttp.setRequestHeader("X-CSRFToken", csrfToken);
+        xhr.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status ==200) {
+                console.log(log(this.responseText));
+                var response = JSON.parse(this.responseText);
+                if (!response.error){
+                    document.querySelector('span[data-productid="'+ productId + '"]').innerText = response.qty
+
+                } else {
+                    console.error(response.error);
+                }
+
+
+            }
+
+        }
+
+        xmlhttp.send(JSON.stringify({product_id:productId}));
+    }
+</script>
+
+</script>
+
+{% endblock %}

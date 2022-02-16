@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block header %}
+    <span class="logo">Cart</span>
+{% endblock %}
+{% block content %}
+     {% for product in cart_products %}
+
+        <span class="card" >
+              <h3 class="card-title">{{ product.name }}</h3>
+                {% for key, value in product_quantity.items %}
+                    {% if product.name == key %}
+                        <h5 class="quantity">Added Quantity - {{ value }}</h5>
+                    {% endif %}
+                {% endfor %}
+               <p>Category - {{ product.category_fk }}</p>
+        </span>
+    {% endfor %}
+<span class="Back">
+        <a href="../../" name="back" value="None">Back</a>
+    </span>
+{% endblock %}
