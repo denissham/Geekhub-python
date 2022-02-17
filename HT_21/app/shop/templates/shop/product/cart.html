@@ -3,18 +3,22 @@
     <span class="logo">Cart</span>
 {% endblock %}
 {% block content %}
-     {% for product in cart_products %}
+    {% if cart_products == None %}
+     <span class="card" > There are not added products </span>
+     {% else %}
+        {% for product in cart_products %}
 
-        <span class="card" >
-              <h3 class="card-title">{{ product.name }}</h3>
-                {% for key, value in product_quantity.items %}
-                    {% if product.name == key %}
-                        <h5 class="quantity">Added Quantity - {{ value }}</h5>
-                    {% endif %}
-                {% endfor %}
-               <p>Category - {{ product.category_fk }}</p>
-        </span>
-    {% endfor %}
+            <span class="card" >
+                  <h3 class="card-title">{{ product.name }}</h3>
+                    {% for key, value in product_quantity.items %}
+                        {% if product.name == key %}
+                            <h5 class="quantity">Added Quantity - {{ value }}</h5>
+                        {% endif %}
+                    {% endfor %}
+                   <p>Category - {{ product.category_fk }}</p>
+            </span>
+            {% endfor %}
+    {% endif %}
 <span class="Back">
         <a href="../../" name="back" value="None">Back</a>
     </span>

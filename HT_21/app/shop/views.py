@@ -141,18 +141,23 @@ def add_to_cart(request):
 
 
 def cart(request):
-    id_products = request.session['cart']['products']
-    cart_list = []
-    product_quantity = {}
-    for j in id_products:
-        product = Product.objects.get(id=j)
-        if product.name in product_quantity:
-            product_quantity[product.name] += 1
-        else:
-            cart_list.append(product)
-            product_quantity[product.name] = 1
-    return render(request, "shop/product/cart.html", {'cart_products': cart_list,
-                                                      'product_quantity': product_quantity})
+    try:
+        id_products = request.session['cart']['products']
+        print(len(id_products))
+        cart_list = []
+        product_quantity = {}
+        for j in id_products:
+            product = Product.objects.get(id=j)
+            if product.name in product_quantity:
+                product_quantity[product.name] += 1
+            else:
+                cart_list.append(product)
+                product_quantity[product.name] = 1
+        return render(request, "shop/product/cart.html", {'cart_products': cart_list,
+                                                          'product_quantity': product_quantity})
+    except:
+        return render(request, "shop/product/cart.html", {'cart_products': None,
+                                                          'product_quantity': None})
 
 
 def user_logout(request):
