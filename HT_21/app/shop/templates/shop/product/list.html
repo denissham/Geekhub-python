@@ -31,6 +31,17 @@
                 <a href="../product/{{ product.id }}">{{ product.name }}</a>
                 <br>
                 ${{ product.price }}
+                {% if role == "user" %}
+                    <span class="AddToCart">{% if product.quantity > 0 %}
+
+                    <form action="{% url 'shop:add_to_cart' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <button type="submit" data-href="{% url 'shop:add_to_cart' %}">Add to Cart</button>
+                    </form>
+                    {% else %}Product is out of stock{% endif %}
+                    </span>
+                {% endif %}
             </div>
         {% endfor %}
     </div>
