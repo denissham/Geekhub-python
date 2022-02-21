@@ -31,7 +31,7 @@
                 <a href="../product/{{ product.id }}">{{ product.name }}</a>
                 <br>
                 ${{ product.price }}
-                {% if role == "user" %}
+                {% if role == "user" or role == "superuser" %}
                     <span class="AddToCart">{% if product.quantity > 0 %}
 
                     <form action="{% url 'shop:add_to_cart' %}" method="post">

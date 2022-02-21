@@ -17,6 +17,14 @@
     <span class="Remove"><a href="../remove/{{ product.id }}">
        <button>Remove Item</button></a>
     </span>
+    <span class="AddToCart">{% if product.quantity > 0 %}
+        <form action="{% url 'shop:add_to_cart' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <button type="submit" data-href="{% url 'shop:add_to_cart' %}">Add to Cart</button>
+        </form>
+        {% else %}Product is out of stock{% endif %}
+    </span>
     <a href="../../" name="back" value="None">Back</a>
 {% elif role == "user" %}
     <span class="AddToCart">{% if product.quantity > 0 %}
