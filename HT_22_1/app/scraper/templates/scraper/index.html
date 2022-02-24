@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scraper</title>
+</head>
+<body>
+<form action="" method="post">
+	{% csrf_token %}
+		<fieldset>
+			<label for="category">Choose a category:</label>
+    			<select name="category" id="category">
+  					<option value="askstories">askstories</option>
+  					<option value="showstories">showstories</option>
+  					<option value="jobstories">jobstories</option>
+  					<option value="newstories">newstories</option>
+				</select>
+			<button type="submit">Submit</button>
+
+		</fieldset>
+</form>
+</body>
+</html>
